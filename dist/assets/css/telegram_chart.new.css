@@ -1,0 +1,405 @@
+/* common */
+.chart, .chart div, i {
+	box-sizing: border-box;
+}
+
+/* chart */
+.chart {
+	width: 100%;
+	/*top: 0;
+	bottom: 0;*/
+	height: 100vh;
+	position: relative;
+	font-family: Arial;
+	padding: 1rem 1.5rem;
+	/*max-width: 50rem;/*
+	/*border: 1px solid silver;*/
+}
+
+/* header */
+.chart .header {
+	width: 100%;
+	margin-bottom: 1rem;
+	/*text-align: center;*/
+}
+
+.chart .header .title {
+	margin: 0.5rem 0;
+}
+
+/* viewport */
+.chart .viewport-window {
+	padding-top: 1.5rem;
+	position: relative;
+	width: 100%;
+	height: 50vh;
+	overflow: hidden;
+}
+
+.chart .viewport {
+	position: absolute;
+	width: 100%;
+	top: 1.5rem;
+	bottom: 0;
+}
+
+/* axis */
+.chart .axis-x {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 2.5rem;
+	right: 0.5rem;
+}
+
+.chart .axis-y {
+	position: absolute;
+	top: 0;
+	bottom: 2rem;
+	left: 0;
+	right: 0;
+}
+
+.chart .axis-x .values {
+	position: absolute;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	bottom: 0rem;
+	height: 2rem;
+	left: -2.5rem;
+	right: -2.5rem;
+	padding-top: 0.5rem;
+}
+
+.chart .axis-y .values {
+	position: absolute;
+	top: -1rem;
+	bottom: 0;
+	left: 0;
+	padding: 0 0.5rem;
+}
+
+.chart .axis-x .value {
+	width: 5rem;
+	text-align: center;
+	font-size: 0.8rem;
+	color: grey;
+	opacity: 1;
+	transition: all linear 1.3s;	
+}
+
+.chart .axis-y .value {
+	position: absolute;
+	font-size: 0.8rem;
+	text-align: right;
+	color: grey;
+	opacity: 1;
+	transition: all linear 1.3s;
+}
+
+@media (max-width: 1024px) {
+	.chart .axis-y .values {
+		top: -0.8rem;
+	}
+
+	.chart .axis-x .value,
+	.chart .axis-y .value {
+		font-size: 0.6rem;
+	}
+}
+
+.chart .axis-x .value.hidden {
+	opacity: 0;
+}
+
+.chart .axis-y .value.hidden {
+	opacity: 0;
+}
+
+.chart .axis-x .grid {
+	position: absolute;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+	top: -1rem;
+	bottom: 1.5rem;
+}
+
+.chart .axis-y .grid {
+	position: absolute;
+	height: 100%;
+	left: 0;
+	right: 0;
+}
+
+.chart .axis-x .line {
+	border-left: 1px solid silver;
+	height: 100%;
+	opacity: 1;
+	transition: all linear 1.3s;	
+}
+
+.chart .axis-y .line {
+	position: absolute;
+	border-top: 1px solid silver;
+	width: 100%;
+	opacity: 1;
+	transition: all linear 1.3s;
+}
+
+.chart .axis-x .line.hidden {
+	opacity: 0;
+}
+
+.chart .axis-y .line.hidden {
+	opacity: 0;
+}
+
+/* plot */
+.chart .plot {
+	position: absolute;
+	left: 2.5rem;
+	right: 0.5rem;
+	top: 0;
+	bottom: 2rem;
+}
+
+.chart .plot-svg {
+	width: 100%;
+	height: 100%;
+}
+
+.chart .plot-svg polyline {
+	fill: none;
+	stroke-width: 2px;
+}
+
+.chart .plot-svg circle {
+	fill: white;
+	stroke-width: 2px;
+}
+
+/* preview */
+.chart .preview {
+	position: relative;
+	width: 100%;
+	height: 3rem;
+	margin-top: 1.5rem;
+}
+
+.chart .preview-svg polyline {
+	fill: none;
+	stroke-width: 1px;
+}
+
+.chart .preview-left {
+	position: absolute;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: rgba(225, 225, 225, 0.67);
+}
+
+.chart .preview-right {
+	position: absolute;
+	height: 100%;
+	top: 0;
+	right: 0;
+	background-color: rgba(225, 225, 225, 0.67);
+}
+
+.chart .slider {
+	position: absolute;
+	cursor: move;
+	top: 0;
+	height: 100%;	
+	border-top: 1px solid silver;
+	border-bottom: 1px solid silver;
+	border-left: 4px solid silver;
+	border-right: 4px solid silver;	
+}
+
+.chart .slider-left {
+	position: absolute;
+	cursor: ew-resize;
+	left: -12px;
+	width: 20px;
+	height: 100%;
+}
+
+.chart .slider-right {
+	position: absolute;
+	cursor: ew-resize;
+	right: -12px;
+	width: 20px;
+	height: 100%;
+}
+
+/* labels */
+.chart .labels {
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+	padding-top: 1.5rem;
+	padding-bottom: 2.5rem;
+}
+
+.chart .label {
+	border: 1px solid silver;
+	border-radius: 1.6rem;
+	padding: 0.5rem 0.8rem;
+	font-size: 0.9rem;
+	cursor: pointer;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+    transition: ease 0.2s;
+}
+
+.chart .label:hover {
+  	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.17);	
+    transition: ease 0.2s;	
+}
+
+.chart .label i {
+	border: 1px solid silver;
+	width: 1.2rem;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    font-size: 0.8rem;
+    font-weight: bolder;
+	vertical-align: middle;
+	text-align: center;
+	border-radius: 0.7rem;
+	margin-right: 0.3rem;
+}
+
+.chart .label.enable i {
+	border: none;
+    color: #fff;
+}
+
+.chart .label.enable i:before {
+	content: '\f26b';
+}
+
+/* hint */
+.chart .hint {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 2.5em;
+	right: 0;
+}
+
+.chart .hint.hidden{
+	visibility: hidden;
+}
+
+.chart .hint .hint-message {
+	position: absolute;
+	z-index: 1;
+	top: -0.5rem;
+	font-size: 1.1rem;
+	padding: 0.5rem;
+	border: 1px solid silver;
+	background-color: white;
+	border-radius: 0.5rem;
+}
+
+@media (max-width: 1024px) {
+	.chart .hint .hint-message {
+		font-size: 0.8rem;
+	}
+}
+
+.chart .hint .hint-header {
+	text-align: center;
+	margin-bottom: 0.5rem;
+}
+
+.chart .hint .hint-body {
+	display: flex;
+	justify-content: space-around;
+}
+
+.chart .hint .hint-col {
+	margin: 0 0.3rem;
+	text-align: center;
+	font-size: 1.1rem;
+	font-weight: bolder;
+}
+
+@media (max-width: 1024px) {
+	.chart .hint .hint-col {
+		font-size: 0.8rem;
+	}
+}
+
+.chart .hint .hint-line {
+	position: absolute;
+	border-left: 1px solid silver;
+	top: 0;
+	bottom: 2rem;
+}
+
+/* theme-switcher*/
+.chart .theme-container {
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 1.5rem;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.chart .theme-switcher {
+	cursor: pointer;
+	color: royalblue;
+}
+
+.chart .theme-switcher:hover {
+	text-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.17);	
+}
+
+
+/* night-style */
+.chart.night,
+.chart.night .hint .hint-message {
+	background-color: #242F3E;
+}
+
+.chart.night .header,
+.chart.night .hint .hint-header,
+.chart.night .label {
+	color: white;
+}
+
+.chart.night .plot-svg circle {
+	fill: #242F3E;
+}
+
+.chart.night .axis-y .values,
+.chart.night .axis-x .line,
+.chart.night .axis-y .line,
+.chart.night .preview,
+.chart.night .slider,
+.chart.night .label,
+.chart.night .label i,
+.chart.night .hint .hint-message,
+.chart.night .hint .hint-line {
+	border-color: dimgray;
+}
+
+.chart.night .hint-message {
+	border: none;
+	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.5);
+}
+
+.chart.night .preview-left,
+.chart.night .preview-right {
+	background-color: rgba(10, 10, 10, 0.67);
+}
